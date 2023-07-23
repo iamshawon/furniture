@@ -12,40 +12,40 @@ class FrontendController extends Controller
 
 
     public function blog(){
-        return view('layouts.blog');
+        return view('blog');
     }
 
 
     public function contactUs(){
-        return view('layouts.contact_us');
+        return view('contact_us');
     }
 
 
     public function services(){
-        return view('layouts.services');
+        return view('services');
     }
 
     public function shop(){
-        return view('layouts.shop');
+        return view('shop');
     }
 
 
     public function aboutUs(){
-        return view('layouts.about-us');
+        return view('about-us');
     }
 
 
     public function cart(){
-        return view('layouts.cart');
+        return view('cart');
     }
 
 
     public function checkout(){
-        return view('layouts.checkout');
+        return view('checkout');
     }
 
-    
+
     public function thankYou(){
-        return view('layouts.thank_you');
+        return view('thank_you');
     }
 }
