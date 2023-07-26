@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Category;
+use Exception;
+use App\Models\Color;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Exception;
 
-class CategoryController extends Controller
+class ColorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class CategoryController extends Controller
     public function index()
     {
         try {
-            $categories = Category::orderby('id', 'desc')->get();
-            return view('backend.admin.category.index', compact('categories'));
+            $colors = Color::orderby('id', 'desc')->get();
+            return view('backend.admin.color.index', compact('colors'));
         } catch (Exception $e) {
             return redirect()->back();
         }
@@ -35,21 +35,20 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-
         try {
             $request->validate([
-                'name'        => 'required|unique:categories,name|max:255',
-                'description' => 'required',
+                'name'        => 'required|unique:colors,name|max:255',
+                'color_code'  => 'required',
             ]);
 
             $data = [
                 'name'        => $request->name,
-                'description' => $request->description,
+                'color_code'  => $request->color_code,
             ];
 
-            Category::create($data);
+            Color::create($data);
 
-            $notify = ['message'    => 'Category created successfully', 'alert-type' => 'success'];
+            $notify = ['message'    => 'Color created successfully', 'alert-type' => 'success'];
 
             return redirect()->back()->with($notify);
         } catch (Exception $e) {
@@ -79,21 +78,21 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $category = Category::find($id);
+            $colors = Color::find($id);
 
             $request->validate([
-                'name'        => 'required|unique:categories,name,' . $category->id . '|max:255',
-                'description' => 'required',
+                'name'        => 'required|unique:categories,name,' . $colors->id . '|max:255',
+                'color_code'  => 'required',
             ]);
 
             $data = [
                 'name'        => $request->name,
-                'description' => $request->description,
+                'color_code'  => $request->color_code,
             ];
 
-            $category->update($data);
+            $colors->update($data);
 
-            $notify = ['message' => 'Category updated successfully', 'alert-type' => 'success'];
+            $notify = ['message' => 'Color updated successfully', 'alert-type' => 'success'];
 
             return redirect()->back()->with($notify);
         } catch (Exception $e) {
@@ -107,11 +106,11 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         try {
-            $category = Category::find($id);
+            $color = Color::find($id);
 
-            $category->delete();
+            $color->delete();
 
-            $notify = ['message' => 'Category deleted!', 'alert-type' => 'error'];
+            $notify = ['message' => 'Color deleted!', 'alert-type' => 'error'];
             return redirect()->back()->with($notify);
         } catch (Exception $e) {
             return redirect()->back()->with($notify);

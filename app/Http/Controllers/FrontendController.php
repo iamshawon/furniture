@@ -6,46 +6,99 @@ use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
-    public function index(){
-        return view('index');
+    /*
+    |--------------------------------------------------------------------------
+    |  HOME
+    |--------------------------------------------------------------------------
+    */
+    public function index()
+    {
+        return view('frontend.home.index');
     }
 
 
-    public function blog(){
-        return view('blog');
+
+    /*
+    |--------------------------------------------------------------------------
+    |  ABOUT US
+    |--------------------------------------------------------------------------
+    */
+    public function aboutUs()
+    {
+        return view('frontend.about.about-us');
     }
 
 
-    public function contactUs(){
-        return view('contact_us');
+
+    /*
+    |--------------------------------------------------------------------------
+    |  CONTACT US
+    |--------------------------------------------------------------------------
+    */
+    public function contactUs()
+    {
+        return view('frontend.contact.contact_us');
     }
 
 
-    public function services(){
-        return view('services');
-    }
-
-    public function shop(){
-        return view('shop');
-    }
 
 
-    public function aboutUs(){
-        return view('about-us');
-    }
-
-
-    public function cart(){
-        return view('cart');
+    /*
+    |--------------------------------------------------------------------------
+    |  SERVICES
+    |--------------------------------------------------------------------------
+    */
+    public function services()
+    {
+        return view('frontend.services.index');
     }
 
 
-    public function checkout(){
-        return view('checkout');
+
+    /*
+    |--------------------------------------------------------------------------
+    |  SHOP
+    |--------------------------------------------------------------------------
+    */
+    public function shop()
+    {
+        return view('frontend.shop.index');
     }
 
 
-    public function thankYou(){
-        return view('thank_you');
+
+    /*
+    |--------------------------------------------------------------------------
+    |  BLOG
+    |--------------------------------------------------------------------------
+    */
+    public function blog()
+    {
+        return view('frontend.blog.index');
+    }
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |  E-COMMERCE
+    |--------------------------------------------------------------------------
+    */
+    public function cart()
+    {
+        return view('frontend.ecommerce.cart');
+    }
+
+
+    public function checkout()
+    {
+        return view('frontend.ecommerce.checkout');
+    }
+
+
+    public function thankYou()
+    {
+        return view('frontend.ecommerce.thank_you');
     }
 }

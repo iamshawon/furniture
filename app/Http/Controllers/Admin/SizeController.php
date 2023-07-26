@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Category;
+use Exception;
+use App\Models\Size;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Exception;
 
-class CategoryController extends Controller
+class SizeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class CategoryController extends Controller
     public function index()
     {
         try {
-            $categories = Category::orderby('id', 'desc')->get();
-            return view('backend.admin.category.index', compact('categories'));
+            $sizes = Size::orderby('id', 'desc')->get();
+            return view('backend.admin.size.index', compact('sizes'));
         } catch (Exception $e) {
             return redirect()->back();
         }
@@ -35,21 +35,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-
         try {
             $request->validate([
-                'name'        => 'required|unique:categories,name|max:255',
-                'description' => 'required',
+                'name'        => 'required|unique:sizes,name|max:255',
             ]);
 
             $data = [
                 'name'        => $request->name,
-                'description' => $request->description,
             ];
 
-            Category::create($data);
+            Size::create($data);
 
-            $notify = ['message'    => 'Category created successfully', 'alert-type' => 'success'];
+            $notify = ['message'    => 'Size created successfully', 'alert-type' => 'success'];
 
             return redirect()->back()->with($notify);
         } catch (Exception $e) {
@@ -79,21 +76,19 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $category = Category::find($id);
+            $size = Size::find($id);
 
             $request->validate([
-                'name'        => 'required|unique:categories,name,' . $category->id . '|max:255',
-                'description' => 'required',
+                'name'        => 'required|unique:sizes,name,' . $size->id . '|max:255',
             ]);
 
             $data = [
                 'name'        => $request->name,
-                'description' => $request->description,
             ];
 
-            $category->update($data);
+            $size->update($data);
 
-            $notify = ['message' => 'Category updated successfully', 'alert-type' => 'success'];
+            $notify = ['message' => 'Size updated successfully', 'alert-type' => 'success'];
 
             return redirect()->back()->with($notify);
         } catch (Exception $e) {
@@ -107,11 +102,11 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         try {
-            $category = Category::find($id);
+            $size = Size::find($id);
 
-            $category->delete();
+            $size->delete();
 
-            $notify = ['message' => 'Category deleted!', 'alert-type' => 'error'];
+            $notify = ['message' => 'Size deleted!', 'alert-type' => 'error'];
             return redirect()->back()->with($notify);
         } catch (Exception $e) {
             return redirect()->back()->with($notify);
